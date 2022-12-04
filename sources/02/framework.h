@@ -1,6 +1,6 @@
 /***********************************************************************************
- * LearnDirectX11 Project                                                          *
- * @file input.cpp                                                                 *
+ * LearnDirectX11 Project                                                           *
+ * @file framework.h                                                               *
  * @date 12/3/2022                                                                 *
  * @author Chirs Cheng                                                             *
  * @copyright Copyright (c) 2022 Chris Cheng                                       *
@@ -23,29 +23,61 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
  * SOFTWARE.                                                                       *
  ***********************************************************************************/
+#ifndef FRAMEWORK_H_
+#define FRAMEWORK_H_
+
+#ifndef UNICODE
+#define UNICODE
+#endif
+
+/***********************************************************************************
+ * Includes                                                                        *
+ ***********************************************************************************/
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 #include "input.h"
+#include "graphics.h"
 
-InputClass::InputClass(){}
-InputClass::InputClass(const InputClass& other){}
-InputClass::~InputClass(){}
+ /***********************************************************************************
+  * Classes                                                                         *
+  ***********************************************************************************/
+class Framework {
+public:
+	Framework(HINSTANCE hInstance);
+	Framework(const Framework&);
+	~Framework();
 
-void InputClass::Initialize(){
-	int i;
-	for(i=0; i<256; i++){
-		m_keys[i] = false;
-	}
-}
+	bool Initialize();
+	void Shutdown();
+	void Run();
 
+	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
-void InputClass::KeyDown(unsigned int input){
-	m_keys[input] = true;
-}
+private:
+	bool Frame();
+	void InitializeWindows();
+	void ShutdownWindows();
 
+private:
+	struct {
+		LPWSTR m_title = L"DX11 Window";
+		LPCWSTR m_APP_NAME = L"DX11 Engine";
+		HINSTANCE m_hInstance;
+		HWND m_hWnd;
+		UINT width = 800;
+		UINT height = 600;
+	}window;
+	
+	InputClass* m_Input;
+	GraphicsClass* m_Graphics;
+};
 
-void InputClass::KeyUp(unsigned int input){
-	m_keys[input] = false;
-}
+static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
-bool InputClass::IsKeyDown(unsigned int key){
-	return m_keys[key];
-}
+/***********************************************************************************
+ * Globals                                                                         *
+ ***********************************************************************************/
+static Framework* appHandle = nullptr;
+
+#endif

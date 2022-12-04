@@ -1,6 +1,6 @@
 /***********************************************************************************
  * LearnDirectX11 Project                                                          *
- * @file input.cpp                                                                 *
+ * @file main.cpp                                                                  *
  * @date 12/3/2022                                                                 *
  * @author Chirs Cheng                                                             *
  * @copyright Copyright (c) 2022 Chris Cheng                                       *
@@ -23,29 +23,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
  * SOFTWARE.                                                                       *
  ***********************************************************************************/
-#include "input.h"
+#include "framework.h"
 
-InputClass::InputClass(){}
-InputClass::InputClass(const InputClass& other){}
-InputClass::~InputClass(){}
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR cmdline, int cmdShow) {
+	Framework* frame = new Framework(hInstance);
 
-void InputClass::Initialize(){
-	int i;
-	for(i=0; i<256; i++){
-		m_keys[i] = false;
+	if (frame->Initialize()) {
+		frame->Run();
 	}
-}
 
+	frame->Shutdown();
+	delete frame;
 
-void InputClass::KeyDown(unsigned int input){
-	m_keys[input] = true;
-}
-
-
-void InputClass::KeyUp(unsigned int input){
-	m_keys[input] = false;
-}
-
-bool InputClass::IsKeyDown(unsigned int key){
-	return m_keys[key];
+	return 0;
 }

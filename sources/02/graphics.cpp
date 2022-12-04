@@ -1,6 +1,6 @@
 /***********************************************************************************
  * LearnDirectX11 Project                                                          *
- * @file input.cpp                                                                 *
+ * @file graphics.cpp                                                              *
  * @date 12/3/2022                                                                 *
  * @author Chirs Cheng                                                             *
  * @copyright Copyright (c) 2022 Chris Cheng                                       *
@@ -23,29 +23,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
  * SOFTWARE.                                                                       *
  ***********************************************************************************/
-#include "input.h"
+#include "graphics.h"
 
-InputClass::InputClass(){}
-InputClass::InputClass(const InputClass& other){}
-InputClass::~InputClass(){}
 
-void InputClass::Initialize(){
-	int i;
-	for(i=0; i<256; i++){
-		m_keys[i] = false;
-	}
+GraphicsClass::GraphicsClass(){
 }
 
 
-void InputClass::KeyDown(unsigned int input){
-	m_keys[input] = true;
+GraphicsClass::GraphicsClass(const GraphicsClass& other){
 }
 
 
-void InputClass::KeyUp(unsigned int input){
-	m_keys[input] = false;
+GraphicsClass::~GraphicsClass(){
 }
 
-bool InputClass::IsKeyDown(unsigned int key){
-	return m_keys[key];
+
+bool GraphicsClass::Initialize(int width, int height, HWND hwnd){
+
+	return true;
+}
+
+
+void GraphicsClass::Shutdown(){
+
+	return;
+}
+
+
+bool GraphicsClass::Frame(){
+
+	return true;
+}
+
+
+bool GraphicsClass::Render(){
+
+	return true;
 }

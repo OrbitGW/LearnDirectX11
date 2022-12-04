@@ -22,9 +22,13 @@ Build with 🧡 by Chirs Cheng
 | ----- | ----------- | --------------------------------------------------------------- |
 | 01    | `source/01` | https://blog.csdn.net/weixin_43130747/article/details/128160426 |
 
-## # Build
+## Build
 
-The build system is now unavailable. Please Wait.
+```bash
+mkdir build
+cd build
+cmake ..
+```
 
 ## Copyright
 

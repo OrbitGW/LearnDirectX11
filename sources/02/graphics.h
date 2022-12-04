@@ -1,6 +1,6 @@
 /***********************************************************************************
  * LearnDirectX11 Project                                                          *
- * @file input.cpp                                                                 *
+ * @file graphics.h                                                                *
  * @date 12/3/2022                                                                 *
  * @author Chirs Cheng                                                             *
  * @copyright Copyright (c) 2022 Chris Cheng                                       *
@@ -23,29 +23,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
  * SOFTWARE.                                                                       *
  ***********************************************************************************/
-#include "input.h"
+#ifndef GRAPHICS_H_
+#define GRAPHICS_H_
 
-InputClass::InputClass(){}
-InputClass::InputClass(const InputClass& other){}
-InputClass::~InputClass(){}
+ /***********************************************************************************
+  * Includes                                                                        *
+  ***********************************************************************************/
+#include <windows.h>
 
-void InputClass::Initialize(){
-	int i;
-	for(i=0; i<256; i++){
-		m_keys[i] = false;
-	}
-}
+ /***********************************************************************************
+  * Globals                                                                         *
+  ***********************************************************************************/
+const bool VSYNC_ENABLED = true;
+const float SCREEN_DEPTH = 1000.0f;
+const float SCREEN_NEAR = 0.1f;
 
+/***********************************************************************************
+ * Classes                                                                         *
+ ***********************************************************************************/
+class GraphicsClass
+{
+public:
+	GraphicsClass();
+	GraphicsClass(const GraphicsClass&);
+	~GraphicsClass();
 
-void InputClass::KeyDown(unsigned int input){
-	m_keys[input] = true;
-}
+	bool Initialize(int, int, HWND);
+	void Shutdown();
+	bool Frame();
 
+private:
+	bool Render();
+};
 
-void InputClass::KeyUp(unsigned int input){
-	m_keys[input] = false;
-}
-
-bool InputClass::IsKeyDown(unsigned int key){
-	return m_keys[key];
-}
+#endif

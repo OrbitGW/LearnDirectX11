@@ -1,6 +1,6 @@
 /***********************************************************************************
  * LearnDirectX11 Project                                                          *
- * @file input.cpp                                                                 *
+ * @file input.h                                                                   *
  * @date 12/3/2022                                                                 *
  * @author Chirs Cheng                                                             *
  * @copyright Copyright (c) 2022 Chris Cheng                                       *
@@ -23,29 +23,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE   *
  * SOFTWARE.                                                                       *
  ***********************************************************************************/
-#include "input.h"
+#ifndef INPUT_H_
+#define INPUT_H_
 
-InputClass::InputClass(){}
-InputClass::InputClass(const InputClass& other){}
-InputClass::~InputClass(){}
+ /***********************************************************************************
+  * Classes                                                                         *
+  ***********************************************************************************/
+class InputClass
+{
+public:
+	InputClass();
+	InputClass(const InputClass&);
+	~InputClass();
 
-void InputClass::Initialize(){
-	int i;
-	for(i=0; i<256; i++){
-		m_keys[i] = false;
-	}
-}
+	void Initialize();
 
+	void KeyDown(unsigned int);
+	void KeyUp(unsigned int);
 
-void InputClass::KeyDown(unsigned int input){
-	m_keys[input] = true;
-}
+	bool IsKeyDown(unsigned int);
 
+private:
+	bool m_keys[256];
+};
 
-void InputClass::KeyUp(unsigned int input){
-	m_keys[input] = false;
-}
-
-bool InputClass::IsKeyDown(unsigned int key){
-	return m_keys[key];
-}
+#endif
